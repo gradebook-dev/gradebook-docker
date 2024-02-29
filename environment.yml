@@ -1,0 +1,5 @@
+dependencies:
+- jupyter-rsession-proxy==2.2.0
+- jupyterlab==4.0.11
+- pip:
+  - jupyter-shiny-proxy==1.1
