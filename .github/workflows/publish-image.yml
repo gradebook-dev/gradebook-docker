@@ -32,7 +32,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.6.0
         with:
-          images: gradebook-dev/gradebook-docker
+          images: gradebook/gradebook
           tags: |
             type=sha,format=short
             type=raw,value=latest,enable={{is_default_branch}}
