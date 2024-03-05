@@ -53,8 +53,6 @@ RUN rm -rf ${HOME}/.cache
 
 USER ${NB_USER}
 
-RUN id && ls -ld ${HOME} && ls -ld ${HOME}/.cache
-
 COPY environment.yml /tmp/environment.yml
 RUN mamba env update -p ${CONDA_DIR} -f /tmp/environment.yml && \
     mamba clean -afy
