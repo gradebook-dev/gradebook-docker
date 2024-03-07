@@ -3,6 +3,7 @@ FROM rocker/geospatial:4.3.2
 ENV NB_USER rstudio
 ENV NB_UID 1000
 ENV CONDA_DIR /srv/conda
+ENV GRADEBOOK_DIR /app/gradebook
 
 # Set ENV for all programs...
 ENV PATH ${CONDA_DIR}/bin:$PATH
@@ -49,7 +50,9 @@ RUN curl --silent --location --fail ${SHINY_SERVER_URL} > /tmp/shiny-server.deb 
 COPY install-mambaforge.bash /tmp/install-mambaforge.bash
 RUN /tmp/install-mambaforge.bash
 
-RUN rm -rf ${HOME}/.cache
+RUN install -d -o ${NB_USER} ${GRADEBOOK_DIR}
+
+RUN rm -rf /home/${NB_USER}/.cache
 
 USER ${NB_USER}
 
@@ -66,13 +69,13 @@ RUN R -e 'devtools::install_github("gradebook-dev/gradebook", ref = "v030")'
 COPY install-gradebook-app.sh /tmp/
 RUN bash /tmp/install-gradebook-app.sh pr 52
 
-COPY shiny.conf ${HOME}/gradebook-app/R/shiny.conf
+COPY shiny.conf ${GRADEBOOK_DIR}/gradebook-app/R/shiny.conf
 
 # Our custom app port
 EXPOSE 3839
 # For using jupyter to proxy R or shiny
 EXPOSE 8888
 
-WORKDIR ${HOME}/gradebook-app/R
+WORKDIR ${GRADEBOOK_DIR}/gradebook-app/R
 
 CMD ["shiny-server", "shiny.conf"]

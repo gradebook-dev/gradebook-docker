@@ -17,6 +17,7 @@ case $1 in
 	*) usage ;;
 esac
 
+cd ${GRADEBOOK_DIR}
 git clone https://github.com/gradebook-dev/gradebook-app
 cd gradebook-app
 
