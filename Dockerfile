@@ -64,7 +64,7 @@ RUN mamba env update -p ${CONDA_DIR} -f /tmp/environment.yml && \
 RUN install2.r DT shinydashboard shinyWidgets Hmisc purrr markdown devtools
 
 # install gradebook library
-RUN R -e 'devtools::install_github("gradebook-dev/gradebook", ref = "v030")'
+RUN R -e 'devtools::install_github("gradebook-dev/gradebook", ref = "v040")'
 
 COPY install-gradebook-app.sh /tmp/
 RUN bash /tmp/install-gradebook-app.sh pr 52
