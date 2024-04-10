@@ -61,7 +61,7 @@ RUN mamba env update -p ${CONDA_DIR} -f /tmp/environment.yml && \
     mamba clean -afy
 
 # install dependencies (this is not reproducible)
-RUN install2.r DT shinydashboard shinyWidgets Hmisc purrr markdown devtools
+RUN install2.r DT shinydashboard shinyWidgets Hmisc purrr markdown devtools plotly
 
 # install gradebook library
 RUN R -e 'devtools::install_github("gradebook-dev/gradebook", ref = "v030")'
